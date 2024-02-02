@@ -6,7 +6,7 @@ EXECUTABLE=profanity2.x64
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Darwin)
-	LDFLAGS=-framework OpenCL -lcurl
+	LDFLAGS=-framework OpenCL -lcurl -L/usr/lib/x86_64-linux-gnu
 	CFLAGS=-c -std=c++11 -Wall -mmmx -O2
 else
 	LDFLAGS=-s -lOpenCL -mcmodel=large
