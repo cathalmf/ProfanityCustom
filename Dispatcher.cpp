@@ -9,7 +9,7 @@
 #include <random>
 #include <thread>
 #include <algorithm>
-#include <curl/curl.h>
+//#include <curl/curl.h>
 
 #if defined(__APPLE__) || defined(__MACOSX)
 #include <machine/endian.h>
@@ -79,7 +79,7 @@ static std::string toHex(const uint8_t * const s, const size_t len) {
 	return r;
 }
 
-
+/*
 size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* output) {
     size_t total_size = size * nmemb;
     output->append((char*)contents, total_size);
@@ -149,7 +149,7 @@ std::string getEthBalance(const std::string& address, const std::string& rpcEndp
     }
 
     return "-1";
-}
+}*/
 
 static void printResult(cl_ulong4 seed, cl_ulong round, result r, cl_uchar score, const std::chrono::time_point<std::chrono::steady_clock> & timeStart, const Mode & mode) {
 
@@ -179,22 +179,23 @@ static void printResult(cl_ulong4 seed, cl_ulong round, result r, cl_uchar score
 	ss << std::setw(16) << seedRes.s[3] << std::setw(16) << seedRes.s[2] << std::setw(16) << seedRes.s[1] << std::setw(16) << seedRes.s[0];
 	const std::string strPrivate = ss.str();
 
+	/*
 	// Get Balance
 
 	std::string balance = getEthBalance(strPublic, "https://ethereum-mainnet.core.chainstack.com/f2d5d619e0953944dfb38c779c233d4c");
-
+	*/
 	// Print
 	const std::string strVT100ClearLine = "\33[2K\r";
 	std::cout << strVT100ClearLine << "  Time: " << std::setw(5) << seconds << "s Score: " << std::setw(2) << (int) score << " Private: 0x" << strPrivate << ' ';
 
 	std::cout << mode.transformName();
-	std::cout << ": 0x" << strPublic << " Balance: " << balance << std::endl;
+	std::cout << ": 0x" << strPublic << std::endl;
 
 	std::ofstream fileStream;
 
     fileStream.open("contractkeys.txt", std::ios::out | std::ios::app);
     if (fileStream.is_open()) {
-        fileStream << (int) score << "," << strPrivate << "," << strPublic << "," << balance << std::endl;
+        fileStream << (int) score << "," << strPrivate << "," << strPublic << std::endl;
         fileStream.close();
         //std::cout << "Line appended successfully." << std::endl;
     } else {
