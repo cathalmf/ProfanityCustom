@@ -33,7 +33,7 @@ std::string readFile(const char * const szFilename)
 	return contents.str();
 }
 
-std::vector<cl_device_id> getAllDevices(cl_device_type deviceType = CL_DEVICE_TYPE_GPU)
+std::vector<cl_device_id> getAllDevices(cl_device_type deviceType = CL_DEVICE_TYPE_ACCELERATOR )//CL_DEVICE_TYPE_GPU)
 {
 	std::vector<cl_device_id> vDevices;
 
